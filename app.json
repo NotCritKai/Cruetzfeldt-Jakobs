@@ -37,6 +37,13 @@
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
-    }
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "ca2639db-b070-4169-9d03-ebf7f75c521d"
+      }
+    },
+    "owner": "ylp-app"
   }
 }
