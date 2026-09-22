@@ -1,60 +1,35 @@
-import { Component } from "react";
 import {
-  Image,
-  StyleSheet,
-  Text,
-  TextInput,
-  TouchableHighlight,
-  View
-} from "react-native";
+  JimNightshade_400Regular,
+  useFonts,
+} from "@expo-google-fonts/jim-nightshade";
+import { KaushanScript_400Regular } from "@expo-google-fonts/kaushan-script";
+import { StyleSheet, Text, View } from "react-native";
 
-export default class App extends Component {
-  state = {
-    search: "",
-  };
+export default function App() {
+  const [fontsLoaded] = useFonts({
+    JimNightshade_400Regular,
+    KaushanScript_400Regular,
+  });
 
-  render() {
-    return (
-      <View style={styles.container}>
-        {/* Google Logo */}
-        <View style={styles.google}>
-          <Image
-            source={{
-              uri: "https://codehs.com/uploads/b61b04781980ec2d29f8083d531cc5f8",
-            }}
-            style={{ width: 250, height: 100 }}
-          />
-        </View>
-
-        {/* Search Bar with Magnifying Glass Icon */}
-        <View style={styles.searchContainer}>
-          <TextInput
-            style={styles.textbox}
-            onChangeText={(search) => this.setState({ search })}
-            value={this.state.search}
-          />
-          <View style={styles.iconContainer}>
-            <Image
-              source={{
-                uri: "https://codehs.com/uploads/55c6938d3d45ecfb8a32916545f27306",
-              }}
-              style={{ width: 30, height: 30 }}
-            />
-          </View>
-        </View>
-
-        {/* Search Button displaying dynamic search term */}
-        <TouchableHighlight
-          style={styles.searchButton}
-          onPress={() => {
-            alert("Searching for: " + this.state.search);
-          }}
-        >
-          <Text style={styles.searchButtonText}>Search</Text>
-        </TouchableHighlight>
-      </View>
-    );
+  if (!fontsLoaded) {
+    return null;
   }
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.title}>Creutzfeldt-Jakob Disease (CJD)</Text>
+
+      <Text style={styles.subtitle}>
+        Creutzfeldt-Jakob Disease (CJD) is a rare, degenerative, and fatal brain
+        disorder. It is caused by abnormal prion proteins that lead to rapid
+        neurodegeneration. CJD can occur sporadically, be inherited, or result
+        from exposure to infected tissue. Symptoms include memory loss,
+        personality changes, and motor dysfunction. There is currently no cure,
+        and treatment focuses on alleviating symptoms and providing supportive
+        care.
+      </Text>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -63,47 +38,15 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     paddingHorizontal: 25,
-    backgroundColor: "#ffffff",
+    backgroundColor: "#F5F5DC",
   },
-  google: {
-    marginBottom: 30,
-  },
-  searchContainer: {
-    flexDirection: "row",
-    width: "100%",
+  title: {
+    fontSize: 80,
     marginBottom: 20,
-    alignItems: "center",
+    fontFamily: "JimNightshade_400Regular",
   },
-  textbox: {
-    flex: 1,
-    height: 48,
-    borderColor: "#000000",
-    borderWidth: 1,
-    borderTopLeftRadius: 24,
-    borderBottomLeftRadius: 24,
-    paddingHorizontal: 20,
-    fontSize: 16,
-  },
-  iconContainer: {
-    height: 48,
-    borderColor: "#000000",
-    borderWidth: 1,
-    borderLeftWidth: 0,
-    borderTopRightRadius: 24,
-    borderBottomRightRadius: 24,
-    justifyContent: "center",
-    alignItems: "center",
-    paddingRight: 10,
-  },
-  searchButton: {
-    backgroundColor: "#4285F4",
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    borderRadius: 4,
-  },
-  searchButtonText: {
-    color: "white",
-    fontWeight: "bold",
-    fontSize: 16,
+  subtitle: {
+    fontSize: 30,
+    fontFamily: "KaushanScript_400Regular",
   },
 });
