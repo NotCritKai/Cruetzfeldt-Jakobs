@@ -57,7 +57,8 @@ export default function Symptoms() {
             </View>
           ))}
           <Text style={styles.source}>
-            Source: NHS — Creutzfeldt-Jakob disease
+            Sources:
+            {"\n"}
           </Text>
         </ScrollView>
       </View>
