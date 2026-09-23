@@ -26,7 +26,7 @@ export default function AppTabs() {
         />
       </NativeTabs.Trigger>
 
-      <NativeTabs.Trigger name="explore">
+      <NativeTabs.Trigger name="symptoms">
         <NativeTabs.Trigger.Label>Symptoms</NativeTabs.Trigger.Label>
 
         <NativeTabs.Trigger.Icon

@@ -37,7 +37,7 @@ export default function HomeScreen() {
         <View style={styles.symptomsRow}>
           <TouchableHighlight
             accessibilityRole="button"
-            onPress={() => router.navigate("/explore")}
+            onPress={() => router.navigate("/symptoms")}
             style={styles.symptomsButton}
             underlayColor="#DADAC0"
           >
