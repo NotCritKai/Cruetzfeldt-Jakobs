@@ -7,13 +7,22 @@ import { ScrollView, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const symptoms = [
-  "Declining memory and thinking ability",
-  "Changes in personality or behaviour",
-  "Trouble with balance, walking and coordination",
-  "Speech that becomes slurred",
-  "Changes in vision, sometimes progressing to blindness",
-  "Involuntary muscle jerks or spasms",
-  "Difficulty swallowing as the disease advances",
+  "Poor Coordination",
+  "Walking and Balance Problems",
+  "Confusion",
+  "Delusions",
+  "Problems With Thinking, Memory, and Judgment",
+  "Behavior Changes (depression, mood swings, and anxiety)",
+  "Speech Difficulty",
+  "Insomnia or Changes in Sleeping Patterns",
+  "Vision Changes",
+  "Hallucinations",
+  "Dizziness",
+  "Tremors",
+  "Weakness of the Arms and Legs",
+  "Blindness",
+  "Paralysis",
+  "Problems Swallowing and Becoming Comatose",
 ];
 
 export default function Symptoms() {
