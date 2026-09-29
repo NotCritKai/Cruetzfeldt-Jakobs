@@ -21,8 +21,8 @@ export default function AppTabs() {
         <NativeTabs.Trigger.Label>Home</NativeTabs.Trigger.Label>
 
         <NativeTabs.Trigger.Icon
-          src={require("@/assets/images/tabIcons/home.png")}
-          renderingMode="template"
+          sf={{ default: "house", selected: "house.fill" }}
+          md="home"
         />
       </NativeTabs.Trigger>
 
@@ -30,8 +30,8 @@ export default function AppTabs() {
         <NativeTabs.Trigger.Label>Symptoms</NativeTabs.Trigger.Label>
 
         <NativeTabs.Trigger.Icon
-          src={require("@/assets/images/tabIcons/explore.png")}
-          renderingMode="template"
+          sf="waveform.path.ecg"
+          md="monitor_heart"
         />
       </NativeTabs.Trigger>
 
@@ -39,8 +39,17 @@ export default function AppTabs() {
         <NativeTabs.Trigger.Label>Risk Factors</NativeTabs.Trigger.Label>
 
         <NativeTabs.Trigger.Icon
-          src={require("@/assets/images/tabIcons/explore.png")}
-          renderingMode="template"
+          sf={{ default: "person.2", selected: "person.2.fill" }}
+          md="groups"
+        />
+      </NativeTabs.Trigger>
+
+      <NativeTabs.Trigger name="diagnosis">
+        <NativeTabs.Trigger.Label>Diagnosis</NativeTabs.Trigger.Label>
+
+        <NativeTabs.Trigger.Icon
+          sf="stethoscope"
+          md="medical_services"
         />
       </NativeTabs.Trigger>
     </NativeTabs>
