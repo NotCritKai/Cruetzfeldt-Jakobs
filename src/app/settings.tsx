@@ -1,23 +1,10 @@
-import { StyleSheet, Text } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { ContentScreen } from '@/components/content-screen';
+import { ThemedText } from '@/components/themed-text';
 
 export default function SettingsScreen() {
   return (
-    <SafeAreaView style={styles.container}>
-      <Text style={styles.text}>Settings</Text>
-    </SafeAreaView>
+    <ContentScreen eyebrow="PREFERENCES" title="Settings">
+      <ThemedText themeColor="textSecondary">Appearance follows your device’s light or dark mode.</ThemedText>
+    </ContentScreen>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-
-  text: {
-    fontSize: 24,
-    fontWeight: "600",
-  },
-});

@@ -1,129 +1,39 @@
-import { JimNightshade_400Regular } from "@expo-google-fonts/jim-nightshade";
-import { KaushanScript_400Regular } from "@expo-google-fonts/kaushan-script";
-import { useFonts } from "expo-font";
-import { router } from "expo-router";
-import { StyleSheet, Text, TouchableHighlight, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { Link } from 'expo-router';
+import { Pressable, StyleSheet, View } from 'react-native';
+
+import { ContentScreen } from '@/components/content-screen';
+import { ThemedText } from '@/components/themed-text';
+import { Spacing } from '@/constants/theme';
+import { useTheme } from '@/hooks/use-theme';
 
 export default function HomeScreen() {
-  const [fontsLoaded] = useFonts({
-    KaushanScript_400Regular,
-    JimNightshade_400Regular,
-  });
-
+  const theme = useTheme();
   return (
-    <SafeAreaView style={styles.safeArea}>
-      <View style={styles.container}>
-        <View style={styles.titleContainer}>
-          <Text style={[styles.title, fontsLoaded && styles.titleFont]}>
-            Cruetzfeldt-Jakobs
-          </Text>
-        </View>
-        <Text style={[styles.subtitle, fontsLoaded && styles.subtitleFont]}>
-          Cruetzfeldt-Jakobs is a rare and fatal degenerative brain disorder. It
-          affects the brain's ability to function properly, leading to rapid
-          cognitive decline and neurological symptoms. There is currently no
-          cure, and the disease progresses rapidly, often resulting in death
-          within a year of onset.
-        </Text>
-
-        <Text style={[styles.learnMore, fontsLoaded && styles.subtitleFont]}>
-          Want to learn more about Cruetzfeldt-Jakobs?
-        </Text>
-        <Text style={styles.navbarNote}>
-          This is also available in the navbar
-        </Text>
-
-        <View style={styles.symptomsRow}>
-          <TouchableHighlight
-            accessibilityRole="button"
-            onPress={() => router.navigate("/symptoms")}
-            style={styles.symptomsButton}
-            underlayColor="#DADAC0"
-          >
-            <Text
-              style={[styles.symptomsLabel, fontsLoaded && styles.titleFont]}
-            >
-              Symptoms
-            </Text>
-          </TouchableHighlight>
-        </View>
+    <ContentScreen eyebrow="UNDERSTANDING CJD" title="Creutzfeldt-Jakob disease">
+      <ThemedText style={styles.intro}>
+        Creutzfeldt-Jakob disease is a rare and fatal degenerative brain disorder. It
+        affects the brain's ability to function properly, leading to rapid
+        cognitive decline and neurological symptoms. There is currently no
+        cure, and the disease progresses rapidly, often resulting in death
+        within a year of onset.
+      </ThemedText>
+      <View style={[styles.card, { backgroundColor: theme.backgroundElement }]}>
+        <ThemedText accessibilityRole="header" style={styles.cardTitle}>Extra Information</ThemedText>
+        <ThemedText themeColor="textSecondary">Learn more about CJD, starting with its signs and symptoms.</ThemedText>
+        <Link href="/symptoms" asChild>
+          <Pressable style={({ pressed }) => [styles.button, { backgroundColor: theme.accent, opacity: pressed ? 0.75 : 1 }]}>
+            <ThemedText style={[styles.buttonLabel, { color: theme.onAccent }]}>View Symptoms</ThemedText>
+          </Pressable>
+        </Link>
       </View>
-    </SafeAreaView>
+    </ContentScreen>
   );
 }
 
 const styles = StyleSheet.create({
-  safeArea: {
-    flex: 1,
-    backgroundColor: "#F5F5DC",
-  },
-
-  container: {
-    flex: 1,
-    width: "100%",
-    paddingHorizontal: 20,
-    paddingTop: 20,
-    backgroundColor: "#F5F5DC",
-  },
-  titleContainer: {
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: 20,
-  },
-  title: {
-    fontSize: 28,
-    color: "#111111",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-
-  titleFont: {
-    fontFamily: "KaushanScript_400Regular",
-  },
-
-  subtitleFont: {
-    fontFamily: "JimNightshade_400Regular",
-  },
-
-  subtitle: {
-    marginTop: 8,
-    fontSize: 20,
-    lineHeight: 32,
-    color: "#000000",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  symptomsRow: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginTop: 4,
-  },
-  symptomsButton: {
-    minHeight: 22,
-    justifyContent: "center",
-    paddingHorizontal: 14,
-    paddingVertical: 4,
-    borderRadius: 8,
-    backgroundColor: "#E6E6CE",
-  },
-  symptomsLabel: {
-    fontSize: 15,
-    color: "#111111",
-  },
-  navbarNote: {
-    fontSize: 12,
-    lineHeight: 18,
-    color: "#555555",
-  },
-  learnMore: {
-    marginTop: 128,
-    fontSize: 22,
-    lineHeight: 28,
-    color: "#000000",
-    justifyContent: "center",
-    alignItems: "center",
-    fontFamily: "KaushanScript_400Regular",
-    fontWeight: "bold",
-  },
+  intro: { fontSize: 18, lineHeight: 30 },
+  card: { borderRadius: 20, padding: Spacing.four, gap: Spacing.three },
+  cardTitle: { fontSize: 22, lineHeight: 30, fontWeight: '600' },
+  button: { width: '100%', minHeight: 60, alignItems: 'center', justifyContent: 'center', borderRadius: 14, paddingHorizontal: 24, paddingVertical: 16 },
+  buttonLabel: { fontSize: 20, lineHeight: 28, fontWeight: '700', textAlign: 'center' },
 });
