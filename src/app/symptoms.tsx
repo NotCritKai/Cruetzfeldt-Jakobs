@@ -1,10 +1,10 @@
-import { JimNightshade_400Regular } from "@expo-google-fonts/jim-nightshade";
-import {
-  KaushanScript_400Regular,
-  useFonts,
-} from "@expo-google-fonts/kaushan-script";
-import { ScrollView, StyleSheet, Text, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { StyleSheet, View } from 'react-native';
+
+import { ContentScreen } from '@/components/content-screen';
+import { ExternalLink } from '@/components/external-link';
+import { ThemedText } from '@/components/themed-text';
+import { Spacing } from '@/constants/theme';
+import { useTheme } from '@/hooks/use-theme';
 
 const symptoms = [
   "Poor Coordination",
@@ -25,103 +25,29 @@ const symptoms = [
   "Problems Swallowing and Becoming Comatose",
 ];
 
-export default function Symptoms() {
-  const [fontsLoaded] = useFonts({
-    KaushanScript_400Regular,
-    JimNightshade_400Regular,
-  });
-
+export default function SymptomsScreen() {
+  const theme = useTheme();
   return (
-    <SafeAreaView style={styles.safeArea}>
-      <View style={styles.container}>
-        <View style={styles.titleContainer}>
-          <Text style={[styles.title, fontsLoaded && styles.titleFont]}>
-            Symptoms of CJD
-          </Text>
-        </View>
-
-        <ScrollView contentContainerStyle={styles.list}>
-          <Text
-            style={[styles.description, fontsLoaded && styles.subtitleFont]}
-          >
-            Symptoms vary with the type and stage of CJD and may include:
-          </Text>
-          {symptoms.map((symptom) => (
-            <View key={symptom} style={styles.listItem} accessible>
-              <Text style={styles.bullet}>•</Text>
-              <Text
-                style={[styles.symptomText, fontsLoaded && styles.subtitleFont]}
-              >
-                {symptom}
-              </Text>
-            </View>
-          ))}
-          <Text style={styles.source}>
-            Source:
-            {"\n"}
-            CDC. “Clinical Overview of Creutzfeldt-Jakob Disease (CJD).”
-            Creutzfeldt-Jakob Disease (CJD), 23 Jan. 2026,
-            https://www.cdc.gov/creutzfeldt-jakob/hcp/clinical-overview/index.html.
-          </Text>
-        </ScrollView>
+    <ContentScreen eyebrow="SIGNS & SYMPTOMS" title="Symptoms of CJD">
+      <ThemedText themeColor="textSecondary">Symptoms vary with the type and stage of CJD and may include:</ThemedText>
+      <View style={[styles.list, { backgroundColor: theme.backgroundElement }]}>
+        {symptoms.map((symptom, index) => (
+          <View key={symptom} style={[styles.item, index > 0 && { borderTopWidth: StyleSheet.hairlineWidth, borderTopColor: theme.backgroundSelected }]} accessible>
+            <ThemedText themeColor="textSecondary" accessible={false}>•</ThemedText>
+            <ThemedText style={styles.symptom}>{symptom}</ThemedText>
+          </View>
+        ))}
       </View>
-    </SafeAreaView>
+      <ExternalLink href="https://www.cdc.gov/creutzfeldt-jakob/hcp/clinical-overview/index.html" style={[styles.source, { color: theme.textSecondary }]}>
+        Source: CDC · Clinical Overview of CJD ↗
+      </ExternalLink>
+    </ContentScreen>
   );
 }
 
 const styles = StyleSheet.create({
-  safeArea: {
-    flex: 1,
-    backgroundColor: "#F5F5DC",
-  },
-  container: {
-    flex: 1,
-    paddingHorizontal: 20,
-    backgroundColor: "#F5F5DC",
-  },
-  list: {
-    paddingTop: 20,
-    paddingBottom: 32,
-    gap: 12,
-  },
-  description: {
-    fontSize: 24,
-    lineHeight: 32,
-    color: "#111111",
-  },
-  listItem: {
-    flexDirection: "row",
-    alignItems: "flex-start",
-    gap: 10,
-  },
-  bullet: {
-    fontSize: 25,
-    lineHeight: 26,
-    color: "#111111",
-  },
-  symptomText: {
-    flex: 1,
-    fontSize: 20,
-    lineHeight: 32,
-    color: "#111111",
-  },
-  source: {
-    marginTop: 8,
-    fontSize: 12,
-    color: "#555555",
-  },
-  titleContainer: {
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  title: {
-    fontSize: 28,
-    color: "#111111",
-  },
-  titleFont: {
-    fontFamily: "KaushanScript_400Regular",
-  },
-  subtitleFont: {
-    fontFamily: "JimNightshade_400Regular",
-  },
+  list: { borderRadius: 20, paddingHorizontal: Spacing.three },
+  item: { flexDirection: 'row', alignItems: 'flex-start', gap: Spacing.three, paddingVertical: Spacing.three },
+  symptom: { flex: 1 },
+  source: { fontSize: 14, lineHeight: 22, textDecorationLine: 'underline', paddingVertical: 12 },
 });
