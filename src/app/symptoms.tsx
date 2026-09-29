@@ -72,10 +72,12 @@ export default function Symptoms() {
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
+    backgroundColor: "#F5F5DC",
   },
   container: {
     flex: 1,
     paddingHorizontal: 20,
+    backgroundColor: "#F5F5DC",
   },
   list: {
     paddingTop: 20,
