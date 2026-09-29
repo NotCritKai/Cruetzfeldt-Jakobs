@@ -57,8 +57,11 @@ export default function Symptoms() {
             </View>
           ))}
           <Text style={styles.source}>
-            Sources:
+            Source:
             {"\n"}
+            CDC. “Clinical Overview of Creutzfeldt-Jakob Disease (CJD).”
+            Creutzfeldt-Jakob Disease (CJD), 23 Jan. 2026,
+            https://www.cdc.gov/creutzfeldt-jakob/hcp/clinical-overview/index.html.
           </Text>
         </ScrollView>
       </View>
