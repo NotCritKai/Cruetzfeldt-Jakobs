@@ -13,7 +13,10 @@ export default function AppTabs() {
         <View style={styles.brand}><ThemedText type="smallBold">CJD Guide</ThemedText></View>
         <TabTrigger name="home" href="/" asChild><TabButton>Home</TabButton></TabTrigger>
         <TabTrigger name="symptoms" href="/symptoms" asChild><TabButton>Symptoms</TabButton></TabTrigger>
+<<<<<<< HEAD
         <TabTrigger name="likely-people" href="/likely-people" asChild><TabButton>Risk Factors</TabButton></TabTrigger>
+=======
+>>>>>>> cada50ac04441101e4883843a597efec01220228
       </TabList>
       <TabSlot style={styles.slot} />
     </Tabs>
