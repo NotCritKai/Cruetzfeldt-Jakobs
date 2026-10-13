@@ -1,5 +1,5 @@
-import { useState } from "react";
 import { Link } from "expo-router";
+import { useState } from "react";
 import { Pressable, StyleSheet, View } from "react-native";
 
 import { ContentScreen } from "@/components/content-screen";
@@ -15,7 +15,6 @@ const informationLinks = [
 
 export default function HomeScreen() {
   const theme = useTheme();
-  const [pressedLink, setPressedLink] = useState<string | null>(null);
   const [hoveredLink, setHoveredLink] = useState<string | null>(null);
   const [focusedLink, setFocusedLink] = useState<string | null>(null);
   return (
@@ -40,22 +39,23 @@ export default function HomeScreen() {
         {informationLinks.map(({ href, label }) => (
           <Link key={href} href={href} asChild>
             <Pressable
-              onPressIn={() => setPressedLink(href)}
-              onPressOut={() => setPressedLink(null)}
               onHoverIn={() => setHoveredLink(href)}
               onHoverOut={() => setHoveredLink(null)}
               onFocus={() => setFocusedLink(href)}
               onBlur={() => setFocusedLink(null)}
-              style={StyleSheet.flatten([
+              style={({ pressed }) => [
                 styles.button,
                 {
                   backgroundColor: theme.accent,
-                  borderColor: focusedLink === href ? theme.text : "transparent",
-                  opacity: pressedLink === href ? 0.75 : hoveredLink === href ? 0.88 : 1,
+                  borderColor:
+                    focusedLink === href ? theme.text : "transparent",
+                  opacity: pressed ? 0.75 : hoveredLink === href ? 0.88 : 1,
                 },
-              ])}
+              ]}
             >
-              <ThemedText style={[styles.buttonLabel, { color: theme.onAccent }]}>
+              <ThemedText
+                style={[styles.buttonLabel, { color: theme.onAccent }]}
+              >
                 {label}
               </ThemedText>
             </Pressable>
