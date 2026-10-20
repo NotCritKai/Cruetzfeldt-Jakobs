@@ -29,10 +29,7 @@ export default function AppTabs() {
       <NativeTabs.Trigger name="symptoms">
         <NativeTabs.Trigger.Label>Symptoms</NativeTabs.Trigger.Label>
 
-        <NativeTabs.Trigger.Icon
-          sf="waveform.path.ecg"
-          md="monitor_heart"
-        />
+        <NativeTabs.Trigger.Icon sf="waveform.path.ecg" md="monitor_heart" />
       </NativeTabs.Trigger>
 
       <NativeTabs.Trigger name="likely-people">
@@ -47,10 +44,12 @@ export default function AppTabs() {
       <NativeTabs.Trigger name="diagnosis">
         <NativeTabs.Trigger.Label>Diagnosis</NativeTabs.Trigger.Label>
 
-        <NativeTabs.Trigger.Icon
-          sf="stethoscope"
-          md="medical_services"
-        />
+        <NativeTabs.Trigger.Icon sf="stethoscope" md="stethoscope" />
+      </NativeTabs.Trigger>
+
+      <NativeTabs.Trigger name="treatments">
+        <NativeTabs.Trigger.Label>Treatment</NativeTabs.Trigger.Label>
+        <NativeTabs.Trigger.Icon sf="bandage" md="healing" />
       </NativeTabs.Trigger>
     </NativeTabs>
   );

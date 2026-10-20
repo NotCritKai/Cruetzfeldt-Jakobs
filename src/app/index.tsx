@@ -11,6 +11,7 @@ const informationLinks = [
   { href: "/symptoms", label: "View Symptoms" },
   { href: "/likely-people", label: "View Risk Factors" },
   { href: "/diagnosis", label: "How CJD Is Diagnosed" },
+  { href: "/treatments", label: "View Treatments" },
 ] as const;
 
 export default function HomeScreen() {
@@ -34,7 +35,8 @@ export default function HomeScreen() {
           Extra Information
         </ThemedText>
         <ThemedText themeColor="textSecondary">
-          Explore the symptoms, risk factors, and how CJD is diagnosed.
+          Explore the symptoms, risk factors, treatments, and how CJD is
+          diagnosed.
         </ThemedText>
         {informationLinks.map(({ href, label }) => (
           <Link key={href} href={href} asChild>
