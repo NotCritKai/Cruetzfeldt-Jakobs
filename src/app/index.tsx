@@ -1,12 +1,14 @@
 import { useFonts } from "expo-font";
 import { Link, type Href } from "expo-router";
-import { useState } from "react";
+import { SymbolView } from "expo-symbols";
+import { useEffect, useState } from "react";
 import {
   Platform,
   Pressable,
   ScrollView,
   StyleSheet,
   useWindowDimensions,
+  useColorScheme,
   View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -18,9 +20,13 @@ import { useTheme } from "@/hooks/use-theme";
 export default function HomeScreen() {
   const theme = useTheme();
   const { width } = useWindowDimensions();
-  const wide = Platform.OS === "web" && width >= 1000;
+  const dark = useColorScheme() === "dark";
+  const background = dark ? theme.background : "#E7E9E2";
+  const [ready, setReady] = useState(false);
+  useEffect(() => setReady(true), []);
+  const wide = ready && Platform.OS === "web" && width >= 1000;
   const surface =
-    theme.background === "#17221C" ? theme.backgroundElement : "#F1F2EC";
+    dark ? theme.backgroundElement : "#F1F2EC";
   useFonts({
     "Spline Sans": require("../../assets/fonts/SplineSans-Regular.ttf"),
     "Spline Sans Bold": require("../../assets/fonts/SplineSans-Bold.ttf"),
@@ -28,7 +34,7 @@ export default function HomeScreen() {
 
   return (
     <SafeAreaView
-      style={[styles.screen, { backgroundColor: theme.background }]}
+      style={[styles.screen, { backgroundColor: background }]}
       edges={["top", "left", "right"]}
     >
       <ScrollView contentContainerStyle={styles.scroll}>
@@ -108,7 +114,7 @@ export default function HomeScreen() {
                 >
                   <HomeText
                     bold
-                    style={[styles.sourceLink, { color: theme.accent }]}
+                    style={{ ...styles.sourceLink, color: theme.accent }}
                   >
                     Source: CDC · Creutzfeldt-Jakob Disease
                   </HomeText>
@@ -210,57 +216,45 @@ function HomeLink({
   const [hovered, setHovered] = useState(false);
   const [focused, setFocused] = useState(false);
   const [pressed, setPressed] = useState(false);
-  const textColor = primary ? theme.onAccent : theme.text;
+  const dark = useColorScheme() === "dark";
+  const primaryText = dark ? "#17221C" : "#FFFFFF";
+  const textColor = primary ? primaryText : theme.text;
   let opacity = 1;
   if (hovered) opacity = 0.88;
   if (pressed) opacity = 0.75;
 
   return (
-    <ContentScreen
-      eyebrow="UNDERSTANDING CJD"
-      title="Creutzfeldt-Jakob disease"
-    >
-      <ThemedText style={styles.intro}>
-        Creutzfeldt-Jakob disease is a rare and fatal degenerative brain
-        disorder. It affects the brain's ability to function properly, leading
-        to rapid cognitive decline and neurological symptoms. There is currently
-        no cure, and the disease progresses rapidly, often resulting in death
-        within a year of onset.
-      </ThemedText>
-      <View style={[styles.card, { backgroundColor: theme.backgroundElement }]}>
-        <ThemedText accessibilityRole="header" style={styles.cardTitle}>
-          Extra Information
-        </ThemedText>
-        <ThemedText themeColor="textSecondary">
-          Explore the symptoms, risk factors, and how CJD is diagnosed.
-        </ThemedText>
-        {informationLinks.map(({ href, label }) => (
-          <Link key={href} href={href} asChild>
-            <Pressable
-              onHoverIn={() => setHoveredLink(href)}
-              onHoverOut={() => setHoveredLink(null)}
-              onFocus={() => setFocusedLink(href)}
-              onBlur={() => setFocusedLink(null)}
-              style={({ pressed }) => [
-                styles.button,
-                {
-                  backgroundColor: theme.accent,
-                  borderColor:
-                    focusedLink === href ? theme.text : "transparent",
-                  opacity: pressed ? 0.75 : hoveredLink === href ? 0.88 : 1,
-                },
-              ]}
-            >
-              <ThemedText
-                style={[styles.buttonLabel, { color: theme.onAccent }]}
-              >
-                {label}
-              </ThemedText>
-            </Pressable>
-          </Link>
-        ))}
-      </View>
-    </ContentScreen>
+    <Link href={href} asChild>
+      <Pressable
+        onHoverIn={() => setHovered(true)}
+        onHoverOut={() => setHovered(false)}
+        onFocus={() => setFocused(true)}
+        onBlur={() => setFocused(false)}
+        onPressIn={() => setPressed(true)}
+        onPressOut={() => setPressed(false)}
+        style={{
+          ...styles.button,
+          backgroundColor: primary ? theme.accent : surface,
+          borderColor: focused ? theme.text : "transparent",
+          opacity,
+        }}
+      >
+        <View style={styles.linkCopy}>
+          <HomeText bold style={[styles.linkTitle, { color: textColor }]}>
+            {label}
+          </HomeText>
+          <HomeText style={[styles.linkDescription, { color: primary ? primaryText : theme.textSecondary }]}>
+            {description}
+          </HomeText>
+        </View>
+        <SymbolView
+          name={{ ios: "arrow.right", android: "arrow_forward", web: "arrow_forward" }}
+          tintColor={textColor}
+          size={20}
+          style={styles.arrow}
+        />
+      </Pressable>
+    </Link>
   );
 }
 
