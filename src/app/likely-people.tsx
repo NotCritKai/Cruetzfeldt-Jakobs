@@ -3,10 +3,9 @@ import { StyleSheet, View } from 'react-native';
 import { ContentScreen } from '@/components/content-screen';
 import { ExternalLink } from '@/components/external-link';
 import { ThemedText } from '@/components/themed-text';
-import { Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
-const factors = [
+const riskFactors = [
   {
     title: 'Older adults',
     description: 'Classic CJD mainly affects older adults. The average age is in the late 60s, and cases under age 30 are very rare.',
@@ -28,13 +27,21 @@ export default function RiskFactorsScreen() {
       <ThemedText themeColor="textSecondary">
         CJD is very rare. About 85% of cases occur sporadically, without a fully understood cause. These factors do not mean someone will develop the disease.
       </ThemedText>
-      {factors.map(({ title, description }) => (
-        <View key={title} style={[styles.card, { backgroundColor: theme.backgroundElement }]}>
-          <ThemedText accessibilityRole="header" style={styles.heading}>{title}</ThemedText>
-          <ThemedText>{description}</ThemedText>
+      {riskFactors.map((factor) => (
+        <View
+          key={factor.title}
+          style={[styles.card, { backgroundColor: theme.backgroundElement }]}
+        >
+          <ThemedText accessibilityRole="header" style={styles.heading}>
+            {factor.title}
+          </ThemedText>
+          <ThemedText>{factor.description}</ThemedText>
         </View>
       ))}
-      <ExternalLink href="https://www.cdc.gov/creutzfeldt-jakob/about/index.html" style={[styles.source, { color: theme.textSecondary }]}>
+      <ExternalLink
+        href="https://www.cdc.gov/creutzfeldt-jakob/about/index.html"
+        style={[styles.source, { color: theme.textSecondary }]}
+      >
         Source: CDC · Classic Creutzfeldt-Jakob Disease
       </ExternalLink>
     </ContentScreen>
@@ -42,7 +49,20 @@ export default function RiskFactorsScreen() {
 }
 
 const styles = StyleSheet.create({
-  card: { borderRadius: 20, padding: Spacing.four, gap: Spacing.two },
-  heading: { fontSize: 22, lineHeight: 30, fontWeight: '600' },
-  source: { fontSize: 14, lineHeight: 22, textDecorationLine: 'underline', paddingVertical: 12 },
+  card: {
+    borderRadius: 20,
+    padding: 24,
+    gap: 8,
+  },
+  heading: {
+    fontSize: 22,
+    lineHeight: 30,
+    fontWeight: '600',
+  },
+  source: {
+    fontSize: 14,
+    lineHeight: 22,
+    textDecorationLine: 'underline',
+    paddingVertical: 12,
+  },
 });

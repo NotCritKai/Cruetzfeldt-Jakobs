@@ -8,7 +8,7 @@ import {
 import { Pressable, StyleSheet, View } from "react-native";
 
 import { ThemedText } from "@/components/themed-text";
-import { MaxContentWidth, Spacing } from "@/constants/theme";
+import { MaxContentWidth } from "@/constants/theme";
 import { useTheme } from "@/hooks/use-theme";
 
 export default function AppTabs() {
@@ -44,6 +44,9 @@ export default function AppTabs() {
 
 function TabButton({ children, isFocused, ...props }: TabTriggerSlotProps) {
   const theme = useTheme();
+  const backgroundColor = isFocused ? theme.backgroundSelected : "transparent";
+  const textColor = isFocused ? "text" : "textSecondary";
+
   return (
     <Pressable
       {...props}
@@ -52,14 +55,14 @@ function TabButton({ children, isFocused, ...props }: TabTriggerSlotProps) {
       style={({ pressed }) => [
         styles.button,
         {
-          backgroundColor: isFocused ? theme.backgroundSelected : "transparent",
+          backgroundColor,
           opacity: pressed ? 0.7 : 1,
         },
       ]}
     >
       <ThemedText
         type="smallBold"
-        themeColor={isFocused ? "text" : "textSecondary"}
+        themeColor={textColor}
       >
         {children}
       </ThemedText>
@@ -68,25 +71,33 @@ function TabButton({ children, isFocused, ...props }: TabTriggerSlotProps) {
 }
 
 const styles = StyleSheet.create({
-  tabs: { flex: 1 },
-  slot: { flex: 1, minHeight: 0 },
+  tabs: {
+    flex: 1,
+  },
+  slot: {
+    flex: 1,
+    minHeight: 0,
+  },
   tabList: {
     width: "100%",
-    maxWidth: MaxContentWidth + Spacing.four * 2,
+    maxWidth: MaxContentWidth + 24 * 2,
     alignSelf: "center",
     flexDirection: "row",
     flexWrap: "wrap",
     alignItems: "center",
-    gap: Spacing.two,
-    padding: Spacing.three,
+    gap: 8,
+    padding: 16,
     borderBottomWidth: 1,
   },
-  brand: { marginRight: "auto", padding: Spacing.two },
+  brand: {
+    marginRight: "auto",
+    padding: 8,
+  },
   button: {
     minHeight: 44,
     justifyContent: "center",
-    paddingHorizontal: Spacing.three,
-    paddingVertical: Spacing.two,
+    paddingHorizontal: 16,
+    paddingVertical: 8,
     borderRadius: 12,
   },
 });

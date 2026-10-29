@@ -3,7 +3,6 @@ import { StyleSheet, View } from "react-native";
 import { ContentScreen } from "@/components/content-screen";
 import { ExternalLink } from "@/components/external-link";
 import { ThemedText } from "@/components/themed-text";
-import { Spacing } from "@/constants/theme";
 import { useTheme } from "@/hooks/use-theme";
 
 const diagnosticSteps = [
@@ -26,10 +25,8 @@ export default function DiagnosisScreen() {
             key={step}
             style={[
               styles.item,
-              index > 0 && {
-                borderTopWidth: StyleSheet.hairlineWidth,
-                borderTopColor: theme.backgroundSelected,
-              },
+              index > 0 && styles.divider,
+              { borderTopColor: theme.backgroundSelected },
             ]}
             accessible
           >
@@ -54,14 +51,22 @@ export default function DiagnosisScreen() {
 }
 
 const styles = StyleSheet.create({
-  list: { borderRadius: 20, paddingHorizontal: Spacing.three },
+  divider: {
+    borderTopWidth: StyleSheet.hairlineWidth,
+  },
+  list: {
+    borderRadius: 20,
+    paddingHorizontal: 16,
+  },
   item: {
     flexDirection: "row",
     alignItems: "flex-start",
-    gap: Spacing.three,
-    paddingVertical: Spacing.three,
+    gap: 16,
+    paddingVertical: 16,
   },
-  step: { flex: 1 },
+  step: {
+    flex: 1,
+  },
   source: {
     fontSize: 14,
     lineHeight: 22,

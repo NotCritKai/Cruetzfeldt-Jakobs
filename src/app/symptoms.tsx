@@ -3,7 +3,6 @@ import { StyleSheet, View } from 'react-native';
 import { ContentScreen } from '@/components/content-screen';
 import { ExternalLink } from '@/components/external-link';
 import { ThemedText } from '@/components/themed-text';
-import { Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
 const symptoms = [
@@ -29,16 +28,31 @@ export default function SymptomsScreen() {
   const theme = useTheme();
   return (
     <ContentScreen eyebrow="SIGNS & SYMPTOMS" title="Symptoms of CJD">
-      <ThemedText themeColor="textSecondary">Symptoms vary with the type and stage of CJD and may include:</ThemedText>
+      <ThemedText themeColor="textSecondary">
+        Symptoms vary with the type and stage of CJD and may include:
+      </ThemedText>
       <View style={[styles.list, { backgroundColor: theme.backgroundElement }]}>
         {symptoms.map((symptom, index) => (
-          <View key={symptom} style={[styles.item, index > 0 && { borderTopWidth: StyleSheet.hairlineWidth, borderTopColor: theme.backgroundSelected }]} accessible>
-            <ThemedText themeColor="textSecondary" accessible={false}>•</ThemedText>
+          <View
+            key={symptom}
+            style={[
+              styles.item,
+              index > 0 && styles.divider,
+              { borderTopColor: theme.backgroundSelected },
+            ]}
+            accessible
+          >
+            <ThemedText themeColor="textSecondary" accessible={false}>
+              •
+            </ThemedText>
             <ThemedText style={styles.symptom}>{symptom}</ThemedText>
           </View>
         ))}
       </View>
-      <ExternalLink href="https://www.cdc.gov/creutzfeldt-jakob/hcp/clinical-overview/index.html" style={[styles.source, { color: theme.textSecondary }]}>
+      <ExternalLink
+        href="https://www.cdc.gov/creutzfeldt-jakob/hcp/clinical-overview/index.html"
+        style={[styles.source, { color: theme.textSecondary }]}
+      >
         Source: CDC · Clinical Overview of CJD ↗
       </ExternalLink>
     </ContentScreen>
@@ -46,8 +60,26 @@ export default function SymptomsScreen() {
 }
 
 const styles = StyleSheet.create({
-  list: { borderRadius: 20, paddingHorizontal: Spacing.three },
-  item: { flexDirection: 'row', alignItems: 'flex-start', gap: Spacing.three, paddingVertical: Spacing.three },
-  symptom: { flex: 1 },
-  source: { fontSize: 14, lineHeight: 22, textDecorationLine: 'underline', paddingVertical: 12 },
+  divider: {
+    borderTopWidth: StyleSheet.hairlineWidth,
+  },
+  list: {
+    borderRadius: 20,
+    paddingHorizontal: 16,
+  },
+  item: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    gap: 16,
+    paddingVertical: 16,
+  },
+  symptom: {
+    flex: 1,
+  },
+  source: {
+    fontSize: 14,
+    lineHeight: 22,
+    textDecorationLine: 'underline',
+    paddingVertical: 12,
+  },
 });
