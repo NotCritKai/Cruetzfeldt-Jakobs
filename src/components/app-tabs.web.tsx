@@ -36,6 +36,9 @@ export default function AppTabs() {
         <TabTrigger name="diagnosis" href="/diagnosis" asChild>
           <TabButton>Diagnosis</TabButton>
         </TabTrigger>
+        <TabTrigger name="treatments" href="/treatments" asChild>
+          <TabButton>Treatments</TabButton>
+        </TabTrigger>
       </TabList>
       <TabSlot style={styles.slot} />
     </Tabs>
@@ -60,10 +63,7 @@ function TabButton({ children, isFocused, ...props }: TabTriggerSlotProps) {
         },
       ]}
     >
-      <ThemedText
-        type="smallBold"
-        themeColor={textColor}
-      >
+      <ThemedText type="smallBold" themeColor={textColor}>
         {children}
       </ThemedText>
     </Pressable>

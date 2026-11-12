@@ -7,8 +7,8 @@ import {
   Pressable,
   ScrollView,
   StyleSheet,
-  useWindowDimensions,
   useColorScheme,
+  useWindowDimensions,
   View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -25,8 +25,7 @@ export default function HomeScreen() {
   const [ready, setReady] = useState(false);
   useEffect(() => setReady(true), []);
   const wide = ready && Platform.OS === "web" && width >= 1000;
-  const surface =
-    dark ? theme.backgroundElement : "#F1F2EC";
+  const surface = dark ? theme.backgroundElement : "#F1F2EC";
   useFonts({
     "Spline Sans": require("../../assets/fonts/SplineSans-Regular.ttf"),
     "Spline Sans Bold": require("../../assets/fonts/SplineSans-Bold.ttf"),
@@ -104,6 +103,12 @@ export default function HomeScreen() {
                 href="/diagnosis"
                 label="Diagnosis"
                 description="Assessment and testing"
+                surface={surface}
+              />
+              <HomeLink
+                href="/treatments"
+                label="Treatment"
+                description="Managing symptoms and care"
                 surface={surface}
               />
 
@@ -243,12 +248,21 @@ function HomeLink({
           <HomeText bold style={[styles.linkTitle, { color: textColor }]}>
             {label}
           </HomeText>
-          <HomeText style={[styles.linkDescription, { color: primary ? primaryText : theme.textSecondary }]}>
+          <HomeText
+            style={[
+              styles.linkDescription,
+              { color: primary ? primaryText : theme.textSecondary },
+            ]}
+          >
             {description}
           </HomeText>
         </View>
         <SymbolView
-          name={{ ios: "arrow.right", android: "arrow_forward", web: "arrow_forward" }}
+          name={{
+            ios: "arrow.right",
+            android: "arrow_forward",
+            web: "arrow_forward",
+          }}
           tintColor={textColor}
           size={20}
           style={styles.arrow}
